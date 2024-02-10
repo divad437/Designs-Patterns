@@ -14,20 +14,20 @@ class TestCodeUnderTest:
         motorcycle = motorcycle_factory.create_vehicle()
         assert isinstance(motorcycle, Motorcycle)
 
-    # def test_car_drive(self) -> None:
-    #     car_factory = CarFactory()
-    #     car = car_factory.create_vehicle()
-    #     assert car.drive() == "The car drives on the road"
+    def test_car_drive(self) -> None:
+        car_factory = CarFactory(self)
+        car = car_factory.create_vehicle(self)
+        assert car.drive() == "The car drives on the road"
 
-    # def test_vehicle_instantiation(self) -> None:
+    # def test_vehicle_instantiation() -> None:
     #     with pytest.raises(TypeError):
     #         Vehicle()
 
-    # def test_vehicle_factory_instantiation(self) -> None:
+    # def test_vehicle_factory_instantiation() -> None:
     #     with pytest.raises(TypeError):
     #         VehicleFactory()
 
-    # def test_car_factory_create(self) -> None:
-    #     car_factory = CarFactory()
-    #     car = car_factory.create_vehicle()
-    #     assert isinstance(car, Car)
+    def test_car_factory_create(self) -> None:
+        car_factory = CarFactory()
+        car = car_factory.create_vehicle()
+        assert isinstance(car, Car)
