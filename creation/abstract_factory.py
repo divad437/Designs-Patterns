@@ -93,7 +93,7 @@ class LinuxGuiFactory(GuiFactory):
         return LinuxTextField()
 
 
-class Application:
+class GuiApplication:
     button: Button
     checkbox: Checkbox
     text_field: TextField
@@ -123,6 +123,6 @@ if __name__ == "__main__":
     else:
         raise ValueError("Unknown operating system")
 
-    app = Application(factory)
+    app = GuiApplication(factory)
     app.create_ui()
     app.paint()

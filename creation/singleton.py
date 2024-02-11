@@ -1,8 +1,9 @@
-import threading
 import logging
+import threading
 from typing import Any
 
 import psycopg2
+
 
 class Singleton:
     _instance = None
@@ -14,32 +15,34 @@ class Singleton:
                 if cls._instance is None:
                     cls._instance = super().__new__(cls)
         return cls._instance
-    
+
 
 class DatabaseConnection(Singleton):
-    def __init__(self, host, port, database, user, password):
+    connection: Any
+
+    def __init__(self, host: str, port: int, database: str, user: str, password: str) -> None:
         self.host = host
         self.port = port
         self.database = database
         self.user = user
         self.password = password
-        self.connection = None
 
-    def connect(self):
+    def connect(self) -> None:
         try:
             self.connection = psycopg2.connect(
                 host=self.host,
                 port=self.port,
                 database=self.database,
                 user=self.user,
-                password=self.password
+                password=self.password,
             )
             print(f"Connected to the database: {self.database}")
         except psycopg2.Error as e:
             logging.error(f"Error connecting to the database: {str(e)}")
+            raise
 
-    def execute_query(self, query) -> Any:
-        if self.connection is None and self.connection.closed:
+    def execute_query(self, query: str) -> list[tuple]:
+        if self.connection is None or self.connection.closed:
             self.connect()
         cursor = self.connection.cursor()
         try:
@@ -48,10 +51,11 @@ class DatabaseConnection(Singleton):
             return results
         except psycopg2.Error as e:
             logging.error(f"Error executing query: {str(e)}")
+            raise
         finally:
-            cursor.close() 
-    
-    def close_connection(self):
+            cursor.close()
+
+    def close_connection(self) -> None:
         if self.connection is not None and not self.connection.closed:
             self.connection.close()
             self.connection = None
