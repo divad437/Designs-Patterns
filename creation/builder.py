@@ -75,8 +75,6 @@ class Director:
         self.builder.set_engine("Sport Engine")
         self.builder.set_trip_computer(True)
         self.builder.set_gps(False)
-        car: Car = self.builder.get_product()
-        print(car)
 
     def construct_suv(self) -> None:
         self.builder.reset()
@@ -84,12 +82,14 @@ class Director:
         self.builder.set_engine("SUV Engine")
         self.builder.set_trip_computer(True)
         self.builder.set_gps(True)
-        car: Car = self.builder.get_product()
-        print(car)
 
 
 if __name__ == "__main__":
     builder = CarBuider()
     director = Director(builder)
     director.construct_sports_car()
+    sport_car: Car = builder.get_product()
+    print(sport_car)
     director.construct_suv()
+    suv_car: Car = builder.get_product()
+    print(suv_car)
