@@ -19,7 +19,7 @@ To use this project, you need to have Python installed on your system. You can d
 Once Python is installed, you can create a virtual environment using `venv` to isolate the project dependencies. Here are the steps to set up the project:
 
 1. Clone the repository: `git clone https://github.com/divad437/Designs-Patterns`
-2. Navigate to the project directory: `cd design-patterns-python`
+2. Navigate to the project directory: `cd Designs-Patterns`
 3. Create a virtual environment: `python -m venv venv`
 4. Activate the virtual environment:
    - On Windows: `venv\Scripts\activate.bat`
