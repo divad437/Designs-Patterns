@@ -25,7 +25,7 @@ class SquarePeg:
         return self.__width
 
 
-class SquarePegAdapter:
+class SquarePegAdapter(RoundPeg):
     def __init__(self, peg: SquarePeg) -> None:
         self.__peg = peg
 
